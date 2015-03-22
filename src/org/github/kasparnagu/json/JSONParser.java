@@ -36,7 +36,7 @@ public class JSONParser {
 					Object key = parseJSON(s);
 					skipWhitespace(s);
 					if(s.findWithinHorizon(":", 1) == null){
-						throw new JSONParseException("Expected :");
+						fail(s,":");
 					}
 					Object value = parseJSON(s);
 					retMap.put(key, value);
@@ -46,18 +46,20 @@ public class JSONParser {
 					}
 				}			
 				if(s.findWithinHorizon("\\}", 1) == null){
-					throw  new JSONParseException("Expected }");
+					fail(s,"}");
 				}
 			}
 		}else if(s.findWithinHorizon("\"", 1) != null){
-			ret = s.findWithinHorizon("(\\\\\\\\|\\\\\"|[^\"])*",0);
+			ret = s.findWithinHorizon("(\\\\\\\\|\\\\\"|[^\"])*",0)
+					.replace("\\\\", "\\")
+					.replace("\\\"","\"");
 			if(s.findWithinHorizon("\"", 1) == null){
-				throw  new JSONParseException("Expected quote");				
+				fail(s,"quote");
 			}
 		}else if(s.findWithinHorizon("'", 1) != null){
 			ret = s.findWithinHorizon("(\\\\\\\\|\\\\'|[^'])*",0);
 			if(s.findWithinHorizon("'", 1) == null){
-				throw  new JSONParseException("Expected quote");				
+				fail(s,"quote");
 			}		
 		}else if(s.findWithinHorizon("\\[", 1) != null){
 			ArrayList<Object> retList = new ArrayList<>();
@@ -72,7 +74,7 @@ public class JSONParser {
 					}
 				}
 				if(s.findWithinHorizon("\\]", 1) == null){
-					throw  new JSONParseException("Expected , or ]");
+					fail(s,", or ]");
 				}
 			}
 		}else if(s.findWithinHorizon("true",4) != null){
@@ -91,10 +93,13 @@ public class JSONParser {
 					ret = Long.valueOf(numStr);
 				}
 			}else{
-				throw new JSONParseException("No JSON value found");
+				throw new JSONParseException("No JSON value found. Found: " + s.findWithinHorizon(".{0,5}", 5));
 			}
 		}
 		return ret;
+	}
+	private static void fail(Scanner scanner, String expected) throws JSONParseException {
+		throw new JSONParseException("Expected " + expected +  " but found:" + scanner.findWithinHorizon(".{0,5}", 5));
 	}
 	private static void skipWhitespace(Scanner s) {
 		s.findWithinHorizon("\\s*", 0);

@@ -24,7 +24,7 @@ public class JSONSerializerTest {
 		assertEquals("true", JSONSerializer.serializeJSON(true));
 		assertEquals("false", JSONSerializer.serializeJSON(false));
 		assertEquals("\"a\"", JSONSerializer.serializeJSON("a"));
-		assertEquals("\"\\\"", JSONSerializer.serializeJSON("\\"));
+		assertEquals("\"\\\\\"", JSONSerializer.serializeJSON("\\"));
 		assertEquals("[1,2.2,[],{\"a\":1,\"b\":\"b\"}]", JSONSerializer.serializeJSON(Arrays.asList(1,2.2,
 				new ArrayList<>(),
 				new HashMap<Object,Object>(){{put("a",1);put("b","b");}})));

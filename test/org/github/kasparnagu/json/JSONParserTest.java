@@ -35,7 +35,7 @@ public class JSONParserTest {
 		Map<?,?> m2 = (Map<?,?>)l.get(2);
 		assertTrue(m2.containsKey("a"));
 		assertEquals(20.0, (Double)m2.get("a"),1e-10);
-		assertEquals("\\\"be\\\"", l.get(3));
+		assertEquals("\"be\"", l.get(3));
 		assertFalse((Boolean)l.get(4));
 		assertTrue((Boolean)l.get(5));
 		assertNull(l.get(6));

@@ -28,7 +28,7 @@ public class JSONSerializer {
 			w.write("null");
 		}else if(o instanceof String){
 			w.write("\"");
-			w.write((String)o);
+			w.write(((String)o).replace("\\","\\\\").replace("\"", "\\\""));
 			w.write("\"");			
 		}else if(o instanceof Integer){
 			w.write(Integer.toString((Integer)o));
