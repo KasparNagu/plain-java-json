@@ -57,7 +57,7 @@ public class JSONParser {
 		}else if(s.findWithinHorizon("'", 1) != null){
 			ret = s.findWithinHorizon("(\\\\\\\\|\\\\'|[^'])*",0);
 			if(s.findWithinHorizon("'", 1) == null){
-				throw  new JSONParseException("Ex??ected quote");				
+				throw  new JSONParseException("Expected quote");				
 			}		
 		}else if(s.findWithinHorizon("\\[", 1) != null){
 			ArrayList<Object> retList = new ArrayList<>();
