@@ -51,9 +51,30 @@ public class JSONParserTest {
 	}
 	
 	@Test(expected=JSONParseException.class)
-	public void testParseJSONStringException() throws JSONParseException {
+	public void testParseJSONStringException1() throws JSONParseException {
 		Object  o = JSONParser.parseJSON("{");
 	}
+
+	@Test(expected=JSONParseException.class)
+	public void testParseJSONStringException2() throws JSONParseException {
+		Object  o = JSONParser.parseJSON("[}");
+	}
+
+	@Test(expected=JSONParseException.class)
+	public void testParseJSONStringException3() throws JSONParseException {
+		Object  o = JSONParser.parseJSON("[1}");
+	}
+
+	@Test(expected=JSONParseException.class)
+	public void testParseJSONStringException4() throws JSONParseException {
+		Object  o = JSONParser.parseJSON("{2}");
+	}
+
+	@Test(expected=JSONParseException.class)
+	public void testParseJSONStringException5() throws JSONParseException {
+		Object  o = JSONParser.parseJSON("\"ja");
+	}
+
 	
 	@Test
 	public void testParseJSONPath() throws JSONParseException, IOException, URISyntaxException {

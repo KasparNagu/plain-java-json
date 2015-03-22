@@ -18,7 +18,11 @@ public class JSONSerializerTest {
 		assertEquals("[]", JSONSerializer.serializeJSON(new ArrayList<>()));
 		assertEquals("{}", JSONSerializer.serializeJSON(new HashMap<>()));
 		assertEquals("1", JSONSerializer.serializeJSON(1));
+		assertEquals("1100001020301", JSONSerializer.serializeJSON(1100001020301l));
 		assertEquals("1.1", JSONSerializer.serializeJSON(1.1));
+		assertEquals("null", JSONSerializer.serializeJSON(null));
+		assertEquals("true", JSONSerializer.serializeJSON(true));
+		assertEquals("false", JSONSerializer.serializeJSON(false));
 		assertEquals("\"a\"", JSONSerializer.serializeJSON("a"));
 		assertEquals("\"\\\"", JSONSerializer.serializeJSON("\\"));
 		assertEquals("[1,2.2,[],{\"a\":1,\"b\":\"b\"}]", JSONSerializer.serializeJSON(Arrays.asList(1,2.2,
